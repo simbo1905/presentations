@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+      class: center, middle
+
+      # Upgrading C# ASP.NET Government Digital Services to use OpenShift?
+
+      Created by [https://twitter.com/intermediation](https://twitter.com/intermediation) for the [Openshift London meetup #2](https://www.meetup.com/London-OpenShift-User-Group/events/240052148/?gj=wc1c.2_e&rv=wc1c.2_e&_af=event&_af_eid=240052148&https=on)
+
+      ---
+
+      # Agenda
+
+      - Government Services
+      - Why OpenShift?
+      - ASP.Who?
+      - Why Now?
+      - Feasibility of adoption?
+      - Gender Pay Gap Reporting service
+      - Demo: Official Microsoft ASP.NET Core demo app on Openshift
+
+      ---
+
+      # UK Government Services (PaaS perspective)
+
+      Context:
+      - Operational services
+      - Often a legislative mandate
+      - User research driven
+
+      Opinionated:
+      - [GDS service manual](https://www.gov.uk/service-manual)
+      - GDS governance (discover, alpha, beta, live)
+      - Build the minimum viable service then continuously improve it
+      - Short feedback cycle (aka Agile)
+      - Use open standards and common platforms
+      - Code in the open and open code (public repos, public license)
+      - Prefer open source (implied by other preferences)
+      - Accessible web interfaces
+      - User focused
+      - Evidence-based
+
+      ???
+
+      (people both running and using)
+      (duty of care to provide excellent user experiences)
+
+      ---
+
+      # Why Openshift?
+
+      - Open-source PaaS with commercial support
+      - Cloud-agnostic abstraction layer turning IaaS into PaaS
+      - Developer experience on a par with Heroku
+      - Supports Git or Docker driven developer workflows
+      - Runs on your laptop
+      - Multi-tenant your dev environment for fast cheap alphas
+      - Kubernetes and Docker which are becoming defacto standards
+      - Advanced features (Blue-Green deployments, AB/MV testing)
+      - Stack agnostic
+      - IMHO less opinionated that others
+
+      ???
+
+      just some of the things
+      in no particular order
+      (BYOD IaaS upgraded to PaaS)
+      Kubernetes and Docker (best in class resource management and interoperability)
+      as lets you under the hood (a massive virtue in real world deployments)
+      (automatic rollback for automatic continuous delivery)
+      (split traffic to test  user experience changes in production or refactoring)
+      (bring your own toolchain)
+      (IMHO Microsoft's open source Docker toolchain will win more mindshare)
+
+      ---
+
+      # C# ASP.NET
+
+      - ASP.NET is Microsoft's server-side web application framework
+      - Originally closed source and intermingled with Windows
+      - Entity Framework is Microsoft's ORM
+      - Both now Apache 2.0 license and on [GitHub](https://www.asp.net/open-source)
+      - Both now rewritten as cross platform "Core" (aka `dotnet`)
+      - New version runs on Windows, Linux or MacOS
+      - Microsoft has official ".Net Core SDK" Docker images (see demo later)
+      - Official images use Debian Linux build packs
+      - Kestrel web server uses `libuv` which Node.js uses
+      - Microsoft is now a platinum member of the Linux Foundation
+      - Microsoft and RedHat are partners so Azure runs Openshift
+      - Microsoft and RedHat are doing a talk on [running SQLServer in Openshift July 11th](http://bit.ly/2sCrMGN)
+
+      ---
+
+      # Why Now (and not last year)?
+
+      - Visual Studio 2015 couldn't read `dotnet` project files 😡
+      - `MSBuild` engine is now open source  😇
+      - `dotnet` recently switched to use *.csproj project files 👍
+      - Visual Studio 2017 CE has a developer pack with Docker support 😍
+      - Visual Studio Code (open source IDE) can debug on MacOS or Linux 😇
+      - `dotnet 2.0` preview release May 2017 👏
+      - Open source stack is actively promoted by Microsoft 😇
+
+      ???
+
+      so alive, kicking and mature
+      (personal experience when discussing training for new hire junior developers)
+      ---
+
+      # Feasibility of adoption?
+
+      - Analysis of a real service and spike work
+      - What's typically deployed to Azure PaaS?
+      - Could it be written the open source ASP.NET stack?
+      - How would it map onto Openshift?
+      - Does the official `dotnet` demo app run on commercially supported Openshift?
+
+      ---
+
+      # Gender Pay Gap Reporting Service
+
+      - [Gender Pay Gap Reporting](https://www.gov.uk/guidance/gender-pay-gap-reporting-overview) is on Github at https://github.com/DFEAGILEDEVOPS/gender-pay-gap
+      - Uses the older ASP.NET and Entity Framework
+      - Small agile team with two developers
+      - Relatively sophisticated
+      - Looks like similar other G2B web apps built on Azure at https://github.com/SkillsFundingAgency
+
+      Findings:
+
+      - ASP.NET Legacy -> ASP.NET Core
+      - Entity Framework Legacy -> Entity Framework Core
+      - Azure WebJobs -> Openshift Joabs
+      - AzureSQL -> AzureSQL, AWS RDS SQLServer, SQLServer Linux (preview), Docker (preview)
+
+      Conclusion:
+
+      - IMHO FOSS C# can now give Java a good run for its money...
+
+      ???
+
+      (Companies House API, Azure cron "web jobs", segregated data tier, multi-module)
+
+      ---
+
+      # Demo: Official Microsoft ASP.NET Core demo app on Openshift
+
+      See instructions at http://bit.ly/2sCzy3z ...
+
+    </textarea>
+    <script src="remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+  highlightStyle: 'monokai'
+});
+    </script>
+  </body>
+</html>
