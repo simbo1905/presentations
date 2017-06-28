@@ -18,12 +18,11 @@
   </head>
   <body>
     <textarea id="source">
-
       class: center, middle
 
       # Upgrading C# ASP.NET Government Digital Services to use OpenShift?
 
-      Created by [https://twitter.com/intermediation](https://twitter.com/intermediation) for the [Openshift London meetup #2](https://www.meetup.com/London-OpenShift-User-Group/events/240052148/?gj=wc1c.2_e&rv=wc1c.2_e&_af=event&_af_eid=240052148&https=on)
+      Created by [@intermediation](https://twitter.com/intermediation) for the [OpenShift London meetup #2](https://www.meetup.com/London-OpenShift-User-Group/events/240052148/?gj=wc1c.2_e&rv=wc1c.2_e&_af=event&_af_eid=240052148&https=on)
 
       ---
 
@@ -32,7 +31,7 @@
       - Government Services
       - Why OpenShift?
       - ASP.Who?
-      - Why Now?
+      - Why Now (and not last year)?
       - Feasibility of adoption?
       - Gender Pay Gap Reporting service
       - Demo: Official Microsoft ASP.NET Core demo app on Openshift
@@ -54,18 +53,13 @@
       - Use open standards and common platforms
       - Code in the open and open code (public repos, public license)
       - Prefer open source (implied by other preferences)
-      - Accessible web interfaces
+      - Accessible web interfaces (common denominator HTML)
       - User focused
       - Evidence-based
 
-      ???
-
-      (people both running and using)
-      (duty of care to provide excellent user experiences)
-
       ---
 
-      # Why Openshift?
+      # Why OpenShift?
 
       - Open-source PaaS with commercial support
       - Cloud-agnostic abstraction layer turning IaaS into PaaS
@@ -76,36 +70,25 @@
       - Kubernetes and Docker which are becoming defacto standards
       - Advanced features (Blue-Green deployments, AB/MV testing)
       - Stack agnostic
-      - IMHO less opinionated that others
-
-      ???
-
-      just some of the things
-      in no particular order
-      (BYOD IaaS upgraded to PaaS)
-      Kubernetes and Docker (best in class resource management and interoperability)
-      as lets you under the hood (a massive virtue in real world deployments)
-      (automatic rollback for automatic continuous delivery)
-      (split traffic to test  user experience changes in production or refactoring)
-      (bring your own toolchain)
-      (IMHO Microsoft's open source Docker toolchain will win more mindshare)
+      - IMHO less opinionated that others ([12factor](http://12factor.net) microservices or monoliths are viable)
 
       ---
 
       # C# ASP.NET
 
       - ASP.NET is Microsoft's server-side web application framework
-      - Originally closed source and intermingled with Windows
-      - Entity Framework is Microsoft's ORM
+      - Entity Framework is Microsoft's ORM framework
+      - Originally closed source and intermingled with Windows or related products
       - Both now Apache 2.0 license and on [GitHub](https://www.asp.net/open-source)
       - Both now rewritten as cross platform "Core" (aka `dotnet`)
       - New version runs on Windows, Linux or MacOS
       - Microsoft has official ".Net Core SDK" Docker images (see demo later)
       - Official images use Debian Linux build packs
       - Kestrel web server uses `libuv` which Node.js uses
+      - Entity Framework Core supports MySQL, PostgreSQL, etc
       - Microsoft is now a platinum member of the Linux Foundation
-      - Microsoft and RedHat are partners so Azure runs Openshift
-      - Microsoft and RedHat are doing a talk on [running SQLServer in Openshift July 11th](http://bit.ly/2sCrMGN)
+      - Microsoft and RedHat are partners so Azure runs OpenShift
+      - Microsoft and RedHat are doing a talk on [running SQLServer in OpenShift July 11th](http://bit.ly/2sCrMGN)
 
       ---
 
@@ -115,23 +98,28 @@
       - `MSBuild` engine is now open source  😇
       - `dotnet` recently switched to use *.csproj project files 👍
       - Visual Studio 2017 CE has a developer pack with Docker support 😍
-      - Visual Studio Code (open source IDE) can debug on MacOS or Linux 😇
+      - Visual Studio Code (open source IDE) can debug on Win10, MacOS or Linux 😇
       - `dotnet 2.0` preview release May 2017 👏
       - Open source stack is actively promoted by Microsoft 😇
 
-      ???
+      ---
 
-      so alive, kicking and mature
-      (personal experience when discussing training for new hire junior developers)
+      # Demo debugging in Visual Studio CE or Code
+
+      The choice is now on par with what Java developers had for many years of proprietary IntelliJ vs open source Eclipse vs Emacs choice...
+
+      IMHO This is important as a lot of developers are really fond of their tools which can be a comfortable walled garden.
+
       ---
 
       # Feasibility of adoption?
 
-      - Analysis of a real service and spike work
+      - IMHO biggest barrier to adoption was familiar tooling which as at VS 2017 CE is fixed 👏
+      - Analysis of a real service and spike work (below)
       - What's typically deployed to Azure PaaS?
       - Could it be written the open source ASP.NET stack?
-      - How would it map onto Openshift?
-      - Does the official `dotnet` demo app run on commercially supported Openshift?
+      - How would it map onto OpenShift?
+      - Does the latest official `dotnet` demo app using Visual Studio CE and official Microsoft Docker images run on commercially supported OpenShift?
 
       ---
 
@@ -143,26 +131,37 @@
       - Relatively sophisticated
       - Looks like similar other G2B web apps built on Azure at https://github.com/SkillsFundingAgency
 
-      Findings:
+      ---
+      class: center, middle
 
-      - ASP.NET Legacy -> ASP.NET Core
-      - Entity Framework Legacy -> Entity Framework Core
-      - Azure WebJobs -> Openshift Joabs
-      - AzureSQL -> AzureSQL, AWS RDS SQLServer, SQLServer Linux (preview), Docker (preview)
-
-      Conclusion:
-
-      - IMHO FOSS C# can now give Java a good run for its money...
-
-      ???
-
-      (Companies House API, Azure cron "web jobs", segregated data tier, multi-module)
+      ["GPG Visual Studo 2017 CE"](http://bit.ly/2rG4uyl)
 
       ---
 
-      # Demo: Official Microsoft ASP.NET Core demo app on Openshift
+      # Findings
 
-      See instructions at http://bit.ly/2sCzy3z ...
+      - ASP.NET Legacy -> ASP.NET Core
+      - Entity Framework Legacy -> Entity Framework Core
+      - Azure WebJobs -> OpenShift Jobs
+      - AzureSQL -> AzureSQL, AWS RDS SQLServer, SQLServer Linux (preview), Docker (preview)
+      - IMHO quite a healthy open source community 👍 More contributors to Microsoft's GitHub account than Facebook or Google at the [end of 2016](http://bit.ly/2sZEOAU)
+
+      ---
+
+      # Demo: Official Microsoft ASP.NET Core demo app on OpenShift
+
+      Literally one command to create a new ASP.NET scalable web-front end using a SQLServer database from an OpenShift template which references two docker images. Instructions at http://bit.ly/2sCzy3z
+
+      *Note* The frontend is the [official demo](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final) which has a tutorial which uses many ASP.NET conventions. The template was adapted from the OpenShift ruby with postgres example.
+
+      ---
+
+      # Conclusion
+
+      - A fairly prototypical Government Digital Service like GPG can be built out on the new .Net Core stack.
+      - .Net Core code created developed and debugged under Visual Studio CE or Visual Studio Code can be deployed onto OpenShift
+      - OpenShift gives a very high degree of automation as a cloud agnostic PaaS
+      - IMHO FOSS C# can now give Java a good run for its money...
 
     </textarea>
     <script src="remark-latest.min.js">
